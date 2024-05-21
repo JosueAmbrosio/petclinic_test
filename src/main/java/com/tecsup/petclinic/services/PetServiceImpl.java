@@ -87,8 +87,6 @@ public class PetServiceImpl implements PetService {
 
 		List<Pet> pets = petRepository.findByName(name);
 
-		pets.stream().forEach(pet -> log.info("" + pet));
-
 		return pets;
 	}
 
@@ -102,8 +100,6 @@ public class PetServiceImpl implements PetService {
 
 		List<Pet> pets = petRepository.findByTypeId(typeId);
 
-		pets.stream().forEach(pet -> log.info("" + pet));
-
 		return pets; 
 	}
 
@@ -116,8 +112,6 @@ public class PetServiceImpl implements PetService {
 	public List<Pet> findByOwnerId(int ownerId) {
 
 		List<Pet> pets = petRepository.findByOwnerId(ownerId);
-
-		pets.stream().forEach(pet -> log.info("" + pet));
 
 		return pets;
 	}
