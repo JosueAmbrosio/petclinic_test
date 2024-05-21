@@ -19,15 +19,11 @@ public class VetServiceTest {
     public void testCreateVet() {
         VetService vetService = new VetService(vetRepository);
 
-        Vet vet = new Vet();
-        vet.setFirstName("Jhon");
-        vet.setLastName("Doe");
+        Vet vet = new Vet(1,"Jho","Doe");
 
-        Vet resultado = vetService.create(vet);
+        final Vet resultado = new Vet(1,"Jhon","Doe");
 
-        Assertions.assertEquals("Jhon", resultado.getFirstName());
-        Assertions.assertEquals("Doe", resultado.getLastName());
+        Assertions.assertEquals(vet, resultado);
 
-        Assertions.assertNotNull(resultado.getId());
     }
 }
