@@ -13,17 +13,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class VetServiceTest {
 
     @Autowired
+    private VetService vetService;
+
+    @Autowired
     private VetRepository vetRepository;
 
     @Test
     public void testCreateVet() {
-        VetService vetService = new VetService(vetRepository);
 
-        Vet vet = new Vet(1,"Jho","Doe");
+        Vet esperado = new Vet(1,"Josue","Ambrosio");
 
-        final Vet resultado = new Vet(1,"Jhon","Doe");
+        VetService verService = new VetService();
 
-        Assertions.assertEquals(vet, resultado);
+        final Vet resultado = verService.create(1,"Josue","Ambrosio");
+
+        Assertions.assertEquals(esperado, resultado);
 
     }
 }
