@@ -1,9 +1,7 @@
 package com.tecsup.petclinic.services;
 
 import com.tecsup.petclinic.entities.Vet;
-import com.tecsup.petclinic.repositories.VetRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,10 +10,20 @@ import java.util.HashMap;
 @Slf4j
 public class VetService {
 
-    private final HashMap<Integer, Vet> vet = new HashMap<>();
+    private final HashMap<Integer, Vet> vetMap = new HashMap<>();
 
-    public Vet create(int id, String nombre, String apellido) {
-        vet.put(id,new Vet(id, nombre, apellido));
-        return vet.get(id);
+    public Vet create(int id, String firstName, String lastName) {
+        Vet vet = new Vet(id, firstName, lastName);
+        vetMap.put(id, vet);
+        return vet;
+    }
+
+    public Vet buscar(int id) {
+        return vetMap.get(id);
+    }
+
+    public String eliminar(int id) {
+        vetMap.remove(id);
+        return "eliminado";
     }
 }

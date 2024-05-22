@@ -1,33 +1,42 @@
 package com.tecsup.petclinic.services;
 
-import com.tecsup.petclinic.entities.Vet;
-import com.tecsup.petclinic.repositories.VetRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.tecsup.petclinic.entities.Vet;
+import com.tecsup.petclinic.services.VetService;
 
-@SpringBootTest
-@Slf4j
 public class VetServiceTest {
 
-    @Autowired
     private VetService vetService;
 
-    @Autowired
-    private VetRepository vetRepository;
+    @BeforeEach
+    void setUp() {
+        vetService = new VetService();
+    }
 
     @Test
-    public void testCreateVet() {
+    void testCreate() {
+        Vet vet = vetService.create(1, "Aaron", "Ambrosio");
+        assertNotNull(vet);
+        assertEquals(1, vet.getId());
+        assertEquals("John", vet.getFirstName());
+        assertEquals("Doe", vet.getLastName());
+    }
 
-        Vet esperado = new Vet(1,"Josue","Ambrosio");
+    @Test
+    void testBuscar() {
+        vetService.create(1, "Abner", "Antezano");
+        Vet vet = vetService.buscar(1);
+        assertNotNull(vet);
+        assertEquals(2, vet.getId());
+    }
 
-        VetService verService = new VetService();
-
-        final Vet resultado = verService.create(1,"Josue","Ambrosio");
-
-        Assertions.assertEquals(esperado, resultado);
-
+    @Test
+    void testEliminar() {
+        vetService.create(1, "Yahaira", "Chavez");
+        String result = vetService.eliminar(1);
+        assertEquals("eliminado", result);
+        assertNull(vetService.buscar(1));
     }
 }
